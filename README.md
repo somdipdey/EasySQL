@@ -52,37 +52,37 @@ Let me show you how you can write the aforementioned code using EasySQL Class as
 That's it. Nothing else. You don't have to worry about opening or closing database connections or worry about other small stuffs, so that you can devote more in developing your solution effectively rather than fighting to execute database queries.
 
 # Methods In EasySQL Class
-Name	  Returns	 Description
+Name:	  Returns:	 Description
 
-IsConnected()	 bool	 Returns true or false whether connection to database is successful or not
+IsConnected():	 bool:	 Returns true or false whether connection to database is successful or not
 
-GetConnectionString()	 String	 Returns the connection string which is set/used
+GetConnectionString():	 String:	 Returns the connection string which is set/used
 
-GetTimeout()	 Int	Returns the connection time out
+GetTimeout():	 Int:	Returns the connection time out
 
-Execute(String)	Int	Executes the query and returns the number of rows affected
+Execute(String):	Int:	Executes the query and returns the number of rows affected
 
-Execute(String, out DataSet)	Int	Executes the query to fetch the data in dataset and returns the number of rows affected
+Execute(String, out DataSet):	Int:	Executes the query to fetch the data in dataset and returns the number of rows affected
 
-Execute(String, out DataTable)	Int	Executes the query to fetch the data in datatable and returns the number of rows affected
+Execute(String, out DataTable):	        Int:	Executes the query to fetch the data in datatable and returns the number of rows affected
 
-ExecuteProcedure(String)	Int	Excutes the stored procedure and returns the number of rows affected
+ExecuteProcedure(String):	Int:	Excutes the stored procedure and returns the number of rows affected
 
-ExecuteProcedure(String, out DataSet)	Int	Excutes the stored procedure to fetch data in dataset and returns the number of rows affected
+ExecuteProcedure(String, out DataSet):	        Int:	Excutes the stored procedure to fetch data in dataset and returns the number of rows affected
 
-ExecuteProcedure(String, out DataTable)	Int	Excutes the stored procedure to fetch data in datatable and returns the number of rows affected
+ExecuteProcedure(String, out DataTable):	Int:	Excutes the stored procedure to fetch data in datatable and returns the number of rows affected
 
-Execute(String, SqlCredential)	Int	Excutes the query using SqlCredential for elevated security and returns the number of rows affected
+Execute(String, SqlCredential):	        Int:	Excutes the query using SqlCredential for elevated security and returns the number of rows affected
 
-Execute(String, SqlCredential, out DataSet)	Int	Executes the query using SqlCredential for elevated security to fetch the data in dataset and returns the number of rows affected
+Execute(String, SqlCredential, out DataSet):	        Int:	Executes the query using SqlCredential for elevated security to fetch the data in dataset and returns the number of rows affected
 
-Execute(String, SqlCredential, out DataTable)	Int	Executes the query using SqlCredential for elevated security to fetch the data in datatable and returns the number of rows affected
+Execute(String, SqlCredential, out DataTable):	        Int:	Executes the query using SqlCredential for elevated security to fetch the data in datatable and returns the number of rows affected
 
 ExecuteProcedure(String, SqlCredential)	Int	Executes the stored procedure using SqlCredential for elevated security and returns the number of rows affected
 
-ExecuteProcedure(String, SqlCredential, out DataSet)	Int	Executes the stored procedure using SqlCredential for elevated security to fetch data in dataset and returns the number of rows affected
+ExecuteProcedure(String, SqlCredential, out DataSet):   	Int:	Executes the stored procedure using SqlCredential for elevated security to fetch data in dataset and returns the number of rows affected
 
-ExecuteProcedure(String, SqlCredential, out DataTable)	Int	Executes the stored procedure using SqlCredential for elevated security to fetch data in datatable and returns the number of rows affected
+ExecuteProcedure(String, SqlCredential, out DataTable): 	Int:	Executes the stored procedure using SqlCredential for elevated security to fetch data in datatable and returns the number of rows affected
 
 
 # Some Examples
