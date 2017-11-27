@@ -146,6 +146,75 @@ Or we can also execute a list of queries as follows:
           }
         }
 
+# Some More Real World Examples
+
+Let's assume we have a table in the database name Customers with the following fields: Name: varchar, Email: varchar, Age: int, Adult: varchar. You would now like to query the table using EasySQL class in the following ways:
+
+            // Connection string to your database
+            string connectionString = "Data Source=ServerName; Initial Catalog = DatabaseName; User ID = UserName; Password=Password";
+            // initiate the EasySQL object
+            EasySQL.EasySQL thisSQL = new EasySQL.EasySQL(connectionString, 300);
+
+            // Your required query to return the names and associated emails of customers
+            string query = "Select Name, Email from Customers Where Age = @age ";
+            // Required parameters
+            Dictionary<string, string> param = new Dictionary<string, string>();
+            param.Add("@age", "26");
+            // Data table which will hold returned result of the query
+            DataTable dt = new DataTable();
+            try
+            {
+                // Execute the query inside a try/catch to catch exceptions as they happen
+                thisSQL.Execute(query, out dt);
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+
+            // Read the names and associated emails from the data table
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    var name = dr["Name"].ToString();
+                    var email = dr["Email"].ToString();
+                }
+            }
+            
+            
+            // The same aforementioned query without any parameter-->
+            string connectionString = "Data Source=ServerName; Initial Catalog = DatabaseName; User ID = UserName; Password=Password";
+            EasySQL.EasySQL thisSQL = new EasySQL.EasySQL(connectionString, 300);
+
+            string query = "Select Name, Email from Customers";
+            DataTable dt = new DataTable();
+            try
+            {
+                thisSQL.Execute(query, out dt);
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    var name = dr["Name"].ToString();
+                    var email = dr["Email"].ToString();
+                }
+            }
+            
+            // And update query on your customer database as follows -->
+            string connectionString = "Data Source=ServerName; Initial Catalog = DatabaseName; User ID = UserName; Password=Password";
+            EasySQL.EasySQL thisSQL = new EasySQL.EasySQL(connectionString, 300);
+
+            string query = "Update Customers Set Adult = @adult Where Age = @age ";
+            Dictionary<string, string> param = new Dictionary<string, string>();
+            param.Add("@adult", "true");
+            param.Add("@age", "26");
+            try
+            {
+                int rowsAffected = thisSQL.Execute(query);
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+
 # Extras
 
 The source code of the EasySQL Class library is available to download from TechNet Gallery and GitHub.
