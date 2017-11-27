@@ -582,11 +582,11 @@ namespace EasySQL
                 if(isDateTime)
                 {
                     string _Value = tempDateTime.ToString(@"yyyy-MM-dd HH:mm:ss");// Sql only accepts a specific format of date time
-                    Query.Replace(Key, _Value);
+                    Query = Query.Replace(Key, "\'" + _Value + "\'");
                 }
                 else
                 {
-                    Query.Replace(Key, Value);
+                    Query = Query.Replace(Key, "\'" + Value + "\'");
                 }
             }
 
@@ -647,11 +647,11 @@ namespace EasySQL
                 if (isDateTime)
                 {
                     string _Value = tempDateTime.ToString(@"yyyy-MM-dd HH:mm:ss");// Sql only accepts a specific format of date time
-                    Query.Replace(Key, _Value);
+                    Query = Query.Replace(Key, "\'" + _Value + "\'");
                 }
                 else
                 {
-                    Query.Replace(Key, Value);
+                    Query = Query.Replace(Key, "\'" + Value + "\'");
                 }
             }
 
@@ -716,11 +716,11 @@ namespace EasySQL
                 if (isDateTime)
                 {
                     string _Value = tempDateTime.ToString(@"yyyy-MM-dd HH:mm:ss");// Sql only accepts a specific format of date time
-                    Query.Replace(Key, _Value);
+                    Query = Query.Replace(Key, "\'" + _Value + "\'");
                 }
                 else
                 {
-                    Query.Replace(Key, Value);
+                    Query = Query.Replace(Key, "\'" + Value + "\'");
                 }
             }
 
@@ -786,11 +786,11 @@ namespace EasySQL
                 if (isDateTime)
                 {
                     string _Value = tempDateTime.ToString(@"yyyy-MM-dd HH:mm:ss");// Sql only accepts a specific format of date time
-                    Query.Replace(Key, _Value);
+                    Query = Query.Replace(Key, "\'" + _Value + "\'");
                 }
                 else
                 {
-                    Query.Replace(Key, Value);
+                    Query = Query.Replace(Key, "\'" + Value + "\'");
                 }
             }
 
@@ -852,11 +852,11 @@ namespace EasySQL
                 if (isDateTime)
                 {
                     string _Value = tempDateTime.ToString(@"yyyy-MM-dd HH:mm:ss");// Sql only accepts a specific format of date time
-                    Query.Replace(Key, _Value);
+                    Query = Query.Replace(Key, "\'" + _Value + "\'");
                 }
                 else
                 {
-                    Query.Replace(Key, Value);
+                    Query = Query.Replace(Key, "\'" + Value + "\'");
                 }
             }
 
@@ -922,11 +922,11 @@ namespace EasySQL
                 if (isDateTime)
                 {
                     string _Value = tempDateTime.ToString(@"yyyy-MM-dd HH:mm:ss");// Sql only accepts a specific format of date time
-                    Query.Replace(Key, _Value);
+                    Query = Query.Replace(Key, "\'" + _Value + "\'");
                 }
                 else
                 {
-                    Query.Replace(Key, Value);
+                    Query = Query.Replace(Key, "\'" + Value + "\'");
                 }
             }
 
