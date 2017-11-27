@@ -559,6 +559,276 @@ namespace EasySQL
         }
 
         // Summary:
+        // Execute non-query with parameters
+        public int Execute(string Query, Dictionary<string, string> Parameters)
+        {
+            if (Query.Trim() == "")
+                throw new ArgumentException("Query can not be blank.");
+
+            // Check each parameter passed
+            foreach(KeyValuePair<string, string > Parameter in Parameters)
+            {
+                string Key = Parameter.Key;
+                string Value = Parameter.Value;
+                // Check if passed parameter exists in the query or else throw an exception
+                if (!Query.Contains(Key))
+                    throw new ArgumentException("Wrong parameter passed: " + Key);
+                
+                // Check if the value is datetime or not and process it accordingly
+                DateTime tempDateTime = DateTime.Now;
+                bool isDateTime = DateTime.TryParse(Value, out tempDateTime);
+
+                // Replace the parameter with its value
+                if(isDateTime)
+                {
+                    string _Value = tempDateTime.ToString(@"yyyy-MM-dd HH:mm:ss");// Sql only accepts a specific format of date time
+                    Query.Replace(Key, _Value);
+                }
+                else
+                {
+                    Query.Replace(Key, Value);
+                }
+            }
+
+            SqlConnection conn = new SqlConnection(SQLConnectionString);
+            SqlCommand comm = null;
+            int returnResult;
+
+            try
+            {
+                comm = conn.CreateCommand();
+                comm.CommandType = CommandType.Text;
+                comm.CommandText = Query;
+                comm.CommandTimeout = SQLTimeout;
+                try
+                {
+                    conn.Open();
+                    returnResult = comm.ExecuteNonQuery();
+                }
+                catch (SqlException err)
+                {
+                    conn.Close();
+                    throw new CustomSqlException("SqlException occured: " + err.Message.ToString(), err);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
+            finally
+            {
+                conn.Close(); // Always remember to close connection to database or else it would lead to memory leakage
+            }
+
+            return returnResult;
+        }
+
+        // Summary:
+        // Execute query with parameters to fetch data in data set
+        public int Execute(string Query, Dictionary<string, string> Parameters, out DataSet Data)
+        {
+            if (Query.Trim() == "")
+                throw new ArgumentException("Query can not be blank.");
+
+            // Check each parameter passed
+            foreach (KeyValuePair<string, string> Parameter in Parameters)
+            {
+                string Key = Parameter.Key;
+                string Value = Parameter.Value;
+                // Check if passed parameter exists in the query or else throw an exception
+                if (!Query.Contains(Key))
+                    throw new ArgumentException("Wrong parameter passed: " + Key);
+
+                // Check if the value is datetime or not and process it accordingly
+                DateTime tempDateTime = DateTime.Now;
+                bool isDateTime = DateTime.TryParse(Value, out tempDateTime);
+
+                // Replace the parameter with its value
+                if (isDateTime)
+                {
+                    string _Value = tempDateTime.ToString(@"yyyy-MM-dd HH:mm:ss");// Sql only accepts a specific format of date time
+                    Query.Replace(Key, _Value);
+                }
+                else
+                {
+                    Query.Replace(Key, Value);
+                }
+            }
+
+            Data = new DataSet();
+
+            SqlConnection conn = new SqlConnection(SQLConnectionString);
+            SqlCommand comm = null;
+            int returnResult;
+
+            try
+            {
+                comm = conn.CreateCommand();
+                comm.CommandType = CommandType.Text;
+                comm.CommandText = Query;
+                comm.CommandTimeout = SQLTimeout;
+                try
+                {
+                    conn.Open();
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(comm);
+                    returnResult = adapter.Fill(Data);
+                }
+                catch (SqlException err)
+                {
+                    conn.Close();
+                    throw new CustomSqlException("SqlException occured: " + err.Message.ToString(), err);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
+            finally
+            {
+                conn.Close(); // Always remember to close connection to database or else it would lead to memory leakage
+            }
+
+            return returnResult;
+        }
+
+        // Summary:
+        // Execute query with credentials for extra security along with parameters
+        public int Execute(string Query, Dictionary<string, string> Parameters, SqlCredential Credential)
+        {
+            if (Query.Trim() == "")
+                throw new ArgumentException("Query can not be blank.s");
+
+            // Check each parameter passed
+            foreach (KeyValuePair<string, string> Parameter in Parameters)
+            {
+                string Key = Parameter.Key;
+                string Value = Parameter.Value;
+                // Check if passed parameter exists in the query or else throw an exception
+                if (!Query.Contains(Key))
+                    throw new ArgumentException("Wrong parameter passed: " + Key);
+
+                // Check if the value is datetime or not and process it accordingly
+                DateTime tempDateTime = DateTime.Now;
+                bool isDateTime = DateTime.TryParse(Value, out tempDateTime);
+
+                // Replace the parameter with its value
+                if (isDateTime)
+                {
+                    string _Value = tempDateTime.ToString(@"yyyy-MM-dd HH:mm:ss");// Sql only accepts a specific format of date time
+                    Query.Replace(Key, _Value);
+                }
+                else
+                {
+                    Query.Replace(Key, Value);
+                }
+            }
+
+            SqlConnection conn = new SqlConnection(SQLConnectionString);
+            SqlCommand comm = null;
+            int returnResult;
+
+            try
+            {
+                comm = conn.CreateCommand();
+                comm.CommandType = CommandType.Text;
+                comm.CommandText = Query;
+                comm.CommandTimeout = SQLTimeout;
+                conn.Credential = Credential;
+                try
+                {
+                    conn.Open();
+                    returnResult = comm.ExecuteNonQuery();
+                }
+                catch (SqlException err)
+                {
+                    conn.Close();
+                    throw new CustomSqlException("SqlException occured: " + err.Message.ToString(), err);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
+            finally
+            {
+                conn.Close(); // Always remember to close connection to database or else it would lead to memory leakage
+            }
+
+            return returnResult;
+        }
+
+        // Summary:
+        // Execute query with credentials for extra security along with parameters and fetch the data in dataset
+        public int Execute(string Query, Dictionary<string, string> Parameters, SqlCredential Credential, out DataSet Data)
+        {
+            if (Query.Trim() == "")
+                throw new ArgumentException("Query can not be blank.s");
+
+            // Check each parameter passed
+            foreach (KeyValuePair<string, string> Parameter in Parameters)
+            {
+                string Key = Parameter.Key;
+                string Value = Parameter.Value;
+                // Check if passed parameter exists in the query or else throw an exception
+                if (!Query.Contains(Key))
+                    throw new ArgumentException("Wrong parameter passed: " + Key);
+
+                // Check if the value is datetime or not and process it accordingly
+                DateTime tempDateTime = DateTime.Now;
+                bool isDateTime = DateTime.TryParse(Value, out tempDateTime);
+
+                // Replace the parameter with its value
+                if (isDateTime)
+                {
+                    string _Value = tempDateTime.ToString(@"yyyy-MM-dd HH:mm:ss");// Sql only accepts a specific format of date time
+                    Query.Replace(Key, _Value);
+                }
+                else
+                {
+                    Query.Replace(Key, Value);
+                }
+            }
+
+            Data = new DataSet();
+
+            SqlConnection conn = new SqlConnection(SQLConnectionString);
+            SqlCommand comm = null;
+            int returnResult;
+
+            try
+            {
+                comm = conn.CreateCommand();
+                comm.CommandType = CommandType.Text;
+                comm.CommandText = Query;
+                comm.CommandTimeout = SQLTimeout;
+                conn.Credential = Credential;
+                try
+                {
+                    conn.Open();
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(comm);
+                    returnResult = adapter.Fill(Data);
+                }
+                catch (SqlException err)
+                {
+                    conn.Close();
+                    throw new CustomSqlException("SqlException occured: " + err.Message.ToString(), err);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
+            finally
+            {
+                conn.Close(); // Always remember to close connection to database or else it would lead to memory leakage
+            }
+
+            return returnResult;
+        }
+
+        // Summary:
         // Fetch the connection string
         public string GetConnectionString()
         { return SQLConnectionString; }
