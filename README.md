@@ -66,6 +66,13 @@ Execute(String, out DataSet):	Int:	Executes the query to fetch the data in datas
 
 Execute(String, out DataTable):	        Int:	Executes the query to fetch the data in datatable and returns the number of rows affected
 
+Execute(String, Dictionary<String, String>):	Int:	Executes the query with parameters and returns the number of rows affected
+
+Execute(String, Dictionary<String, String>, out DataSet):	Int:	Executes the query with parameters to fetch the data in dataset and returns the number of rows affected
+
+Execute(String, Dictionary<String, String>, out DataTable):	        Int:	Executes the query with parameters to fetch the data in datatable and returns the number of rows affected
+
+
 ExecuteProcedure(String):	Int:	Excutes the stored procedure and returns the number of rows affected
 
 ExecuteProcedure(String, out DataSet):	        Int:	Excutes the stored procedure to fetch data in dataset and returns the number of rows affected
@@ -77,6 +84,13 @@ Execute(String, SqlCredential):	        Int:	Excutes the query using SqlCredenti
 Execute(String, SqlCredential, out DataSet):	        Int:	Executes the query using SqlCredential for elevated security to fetch the data in dataset and returns the number of rows affected
 
 Execute(String, SqlCredential, out DataTable):	        Int:	Executes the query using SqlCredential for elevated security to fetch the data in datatable and returns the number of rows affected
+
+Execute(String, Dictionary<String, String>, SqlCredential):	        Int:	Excutes the query with parameters using SqlCredential for elevated security and returns the number of rows affected
+
+Execute(String, Dictionary<String, String>, SqlCredential, out DataSet):	        Int:	Executes the query with parameters using SqlCredential for elevated security to fetch the data in dataset and returns the number of rows affected
+
+Execute(String, Dictionary<String, String>, SqlCredential, out DataTable):	        Int:	Executes the query with parameters using SqlCredential for elevated security to fetch the data in datatable and returns the number of rows affected
+
 
 ExecuteProcedure(String, SqlCredential):	Int:	Executes the stored procedure using SqlCredential for elevated security and returns the number of rows affected
 
