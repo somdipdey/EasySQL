@@ -150,7 +150,7 @@ Or we can also execute a list of queries as follows:
 
 Let's assume we have a table in the database named, Customers, with the following fields: Name: varchar, Email: varchar, Age: int, Adult: varchar, IsBritish: boolean. You would now like to query the table using EasySQL class in the following ways:
 			
-			// Example 1::
+	    // Example 1::
             // Connection string to your database
             string connectionString = "Data Source=ServerName; Initial Catalog = DatabaseName; User ID = UserName; Password=Password";
             // initiate the EasySQL object
@@ -181,7 +181,7 @@ Let's assume we have a table in the database named, Customers, with the followin
             }
             
             
-			// Example 2::
+	    // Example 2::
             // The same aforementioned query without any parameter-->
             string connectionString = "Data Source=ServerName; Initial Catalog = DatabaseName; User ID = UserName; Password=Password";
             EasySQL.EasySQL thisSQL = new EasySQL.EasySQL(connectionString, 300);
@@ -203,7 +203,7 @@ Let's assume we have a table in the database named, Customers, with the followin
                 }
             }
             
-			// Example 3::
+	    // Example 3::
             // And an update query on your customer database as follows -->
             string connectionString = "Data Source=ServerName; Initial Catalog = DatabaseName; User ID = UserName; Password=Password";
             EasySQL.EasySQL thisSQL = new EasySQL.EasySQL(connectionString, 300);
@@ -217,8 +217,9 @@ Let's assume we have a table in the database named, Customers, with the followin
                 int rowsAffected = thisSQL.Execute(query, param);
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
-			
-			// Example 4::
+	
+	
+	    // Example 4::
             // And another query to fetch all customers' names who are British -->
             string connectionString = "Data Source=ServerName; Initial Catalog = DatabaseName; User ID = UserName; Password=Password";
             EasySQL.EasySQL thisSQL = new EasySQL.EasySQL(connectionString, 300);
