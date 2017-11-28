@@ -148,8 +148,9 @@ Or we can also execute a list of queries as follows:
 
 # Some More Real World Examples
 
-Let's assume we have a table in the database name Customers with the following fields: Name: varchar, Email: varchar, Age: int, Adult: varchar. You would now like to query the table using EasySQL class in the following ways:
-
+Let's assume we have a table in the database named, Customers, with the following fields: Name: varchar, Email: varchar, Age: int, Adult: varchar, IsBritish: boolean. You would now like to query the table using EasySQL class in the following ways:
+			
+			// Example 1::
             // Connection string to your database
             string connectionString = "Data Source=ServerName; Initial Catalog = DatabaseName; User ID = UserName; Password=Password";
             // initiate the EasySQL object
@@ -165,7 +166,7 @@ Let's assume we have a table in the database name Customers with the following f
             try
             {
                 // Execute the query inside a try/catch to catch exceptions as they happen
-                thisSQL.Execute(query, out dt);
+                thisSQL.Execute(query, param, out dt);
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
 
@@ -180,6 +181,7 @@ Let's assume we have a table in the database name Customers with the following f
             }
             
             
+			// Example 2::
             // The same aforementioned query without any parameter-->
             string connectionString = "Data Source=ServerName; Initial Catalog = DatabaseName; User ID = UserName; Password=Password";
             EasySQL.EasySQL thisSQL = new EasySQL.EasySQL(connectionString, 300);
@@ -201,7 +203,8 @@ Let's assume we have a table in the database name Customers with the following f
                 }
             }
             
-            // And update query on your customer database as follows -->
+			// Example 3::
+            // And an update query on your customer database as follows -->
             string connectionString = "Data Source=ServerName; Initial Catalog = DatabaseName; User ID = UserName; Password=Password";
             EasySQL.EasySQL thisSQL = new EasySQL.EasySQL(connectionString, 300);
 
@@ -211,9 +214,34 @@ Let's assume we have a table in the database name Customers with the following f
             param.Add("@age", "26");
             try
             {
-                int rowsAffected = thisSQL.Execute(query);
+                int rowsAffected = thisSQL.Execute(query, param);
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
+			
+			// Example 4::
+            // And another query to fetch all customers' names who are British -->
+            string connectionString = "Data Source=ServerName; Initial Catalog = DatabaseName; User ID = UserName; Password=Password";
+            EasySQL.EasySQL thisSQL = new EasySQL.EasySQL(connectionString, 300);
+
+            string query = "Select Name from Customers where IsBritish = @british ";
+            Dictionary<string, string> param = new Dictionary<string, string>();
+            param.Add("@british", "1"); // For boolean the value to be passed is 1 (true) or 0 (false).
+			DataTable dt = new DataTable();
+            try
+            {
+                int rowsAffected = thisSQL.Execute(query, param, out dt);
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+			
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    var name = dr["Name"].ToString();
+                }
+            }
+
+
 
 # Extras
 
